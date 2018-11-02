@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Liste des categories</div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label>Mot clé : </label>
+        <input type="text" [(ngModel)]="motCle">
+        <button class="btn btn-primary" (click)="doSearch()">Chercher</button>
+      </div>
+      <table class="table table-striped" *ngIf="pageCategories">
+        <tr>
+          <th>ID</th><th>Nom</th><th>Edit</th><th>Delete</th>
+        </tr>
+        <tr *ngFor="let c of pageCategories?.content">
+          <td> {{c.id}}</td>
+          <td><a (click)="OnGetContacts(c.id)">{{c.name}}</a></td>
+          <td><a (click)="OnEditCategory(c.id)" class="clickable">Edit</a></td>
+          <td><a (click)="OnDeleteCategory(c)" class="clickable">Delete</a></td>
+
+        </tr>
+      </table>
+
+      <div class="container">
+        <ul class="nav nav-pills">
+          <li [ngClass]="{'active': i==currentPage}" *ngFor="let p of pages; let i=index">
+            <a class="clickable" (click)="goToPage(i)">
+              {{i+1}}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+
+
+    </div>
+  </div>
+  <div class="panel panel-primary" *ngIf="pageContacts">
+    <div class="panel-heading">Liste des contactes de category {{pageContacts?.content[0].name}}</div>
+    <div class="panel-body">
+      <table class="table table-striped" >
+        <tr>
+          <th>ID</th><th>Nom</th><th>Prénom</th><th>Tel</th>
+        </tr>
+        <tr *ngFor="let c of pageContacts?.content[0].contacts">
+          <td>{{c.id}}</td>
+          <td>{{c.nom}}</td>
+          <td>{{c.prenom}}</td>
+          <td>{{c.tel}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
